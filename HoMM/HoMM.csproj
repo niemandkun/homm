@@ -57,14 +57,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Engine\Directions.cs" />
+    <Compile Include="Engine\TerrainType.cs" />
     <Compile Include="Hero\HeroRobot.cs" />
     <Compile Include="Common\Vector2i.cs" />
-    <Compile Include="HommEngine\Directions.cs" />
     <Compile Include="Engine\HommEngine.cs" />
     <Compile Include="Engine\IHommEngine.cs" />
     <Compile Include="Engine\MapObject.cs" />
     <Compile Include="Engine\MapUnityConnecter.cs" />
-    <Compile Include="HommEngine\TerrainType.cs" />
     <Compile Include="Model\Combat.cs" />
     <Compile Include="Generators\Common\ISigmaMap.cs" />
     <Compile Include="Generators\Common\RandomGenerator.cs" />

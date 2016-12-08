@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using CVARC.V2;
 using HoMM.Generators;
-using HoMM.HommEngine;
+using HoMM.Engine;
 
 namespace HoMM.World
 {

@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 
-namespace HoMM.HommEngine
+namespace HoMM.Engine
 {
     public static class MapUnityConnecter
     {

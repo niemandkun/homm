@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace HoMM.HommEngine {
+namespace HoMM.Engine {
     public class HommEngine : IHommEngine {
         //setspeed(enum), commonengine, coords, del color, коллайдеры, перейти на раунд, heroes
         private Dictionary<string, GameObject> prefabs = new Dictionary<string, GameObject>() {

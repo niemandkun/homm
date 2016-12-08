@@ -1,4 +1,4 @@
-﻿namespace HoMM.HommEngine {
+﻿namespace HoMM.Engine {
     public enum TerrainType {
         Arid,
         Desert,
