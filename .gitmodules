@@ -1,0 +1,3 @@
+[submodule "uCvarc"]
+	path = uCvarc
+	url = https://github.com/air-labs/uCvarc.git
