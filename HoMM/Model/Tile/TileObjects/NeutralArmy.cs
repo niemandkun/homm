@@ -19,15 +19,15 @@
             GuardedObject = obj;
         }
 
-        public void KillMonsters(int amount)
+        public override void InteractWithPlayer(Player p)
         {
-            if (amount > Quantity)
-            {
-                Quantity = 0;
+            var tempPlayer = new Player("Neutral army", null, 0, 0);
+            tempPlayer.AddUnits(Unit.UnitType, Quantity);
+            Combat.ResolveBattle(p, tempPlayer);
+            if (tempPlayer.HasNoArmy)
                 OnRemove();
-            }
             else
-                Quantity -= amount;
+                Quantity = tempPlayer.Army[Unit.UnitType];
         }
     }
 }

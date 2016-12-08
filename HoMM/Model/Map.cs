@@ -62,7 +62,8 @@ namespace HoMM
             TileTerrain t = InitTerrain(char.ToUpper(s[0]));
             TileObject obj = InitObject(s, new Location(y, x));
             var tile = new Tile(x, y, t, obj);
-            //tile.tileObject.Remove += (o) => tile.tileObject = null;
+            if (tile.tileObject != null)
+                tile.tileObject.Remove += (o) => tile.tileObject = null;
             return tile;
         }
 

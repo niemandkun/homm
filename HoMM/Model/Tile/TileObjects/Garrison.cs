@@ -6,15 +6,26 @@ namespace HoMM
     {
         public override bool IsPassable => true;
 
-        public Dictionary<Unit, int> guards;
-        public Garrison(Dictionary<Unit, int> guards, Location location) : base(location)
+        public Dictionary<UnitType, int> Guards { get; private set; }
+        public Garrison(Dictionary<UnitType, int> guards, Location location) : base(location)
         {
-            this.guards = guards;
+            Guards = guards;
         }
 
         public override void InteractWithPlayer(Player p)
         {
-            base.InteractWithPlayer(p);
+            if (p != Owner)
+            {
+                var tempPlayer = new Player("Garrison", null, 0, 0);
+                foreach (var kvp in Guards)
+                    tempPlayer.AddUnits(kvp.Key, kvp.Value);
+                Combat.ResolveBattle(p, tempPlayer);
+                if (tempPlayer.HasNoArmy)
+                    Owner = p;
+                else
+                    foreach (var key in Guards.Keys)
+                        Guards[key] = tempPlayer.Army[key];
+            }
         }
     }
 }

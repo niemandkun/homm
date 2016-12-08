@@ -36,7 +36,7 @@ namespace HexModelTesting
         {
             round.UpdateTick(new Location[] { new Location(0, 0), new Location(1, 1) });
             Assert.That(round.Players[1].CheckResourceAmount(Resource.Rubles) == 100);
-            //Assert.That(round.map[1, 1].tileObject == null);
+            Assert.That(round.Map[new Location(1, 1)].tileObject == null);
         }
 
         [Test]
