@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoMM.MapViewer", "HoMM.MapV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoMM.Testing", "HoMM.Testing\HoMM.Testing.csproj", "{043F4FE1-FBBD-41A8-A880-E32314373DCD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVARC.Core", "uCvarc\NewCVARC\CVARC\Cvarc.Core\CVARC.Core\CVARC.Core.csproj", "{F7B5021F-09E8-4388-97A2-4B44B9770D03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityCommons", "uCvarc\NewCVARC\CVARC\Cvarc.UnityCommons\UnityCommons\UnityCommons.csproj", "{5876DEFF-3555-4754-BACE-74EDED2B8551}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{043F4FE1-FBBD-41A8-A880-E32314373DCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{043F4FE1-FBBD-41A8-A880-E32314373DCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{043F4FE1-FBBD-41A8-A880-E32314373DCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7B5021F-09E8-4388-97A2-4B44B9770D03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7B5021F-09E8-4388-97A2-4B44B9770D03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7B5021F-09E8-4388-97A2-4B44B9770D03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7B5021F-09E8-4388-97A2-4B44B9770D03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5876DEFF-3555-4754-BACE-74EDED2B8551}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5876DEFF-3555-4754-BACE-74EDED2B8551}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5876DEFF-3555-4754-BACE-74EDED2B8551}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5876DEFF-3555-4754-BACE-74EDED2B8551}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
