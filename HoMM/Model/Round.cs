@@ -43,29 +43,6 @@ namespace HoMM
             Map[newLocation].tileObject?.InteractWithPlayer(player);
         }
 
-        //obsolete
-        private void InteractWithObject(Player currentPlayer, TileObject obj)
-        {
-            switch (obj.GetType().Name)
-            {
-                case "Mine":
-                    {
-                        var m = (Mine)obj;
-                        m.Owner = currentPlayer;
-                        break;
-                    }
-                case "ResourcePile":
-                    {
-                        var rp = (ResourcePile)obj;
-                        currentPlayer.GainResources(rp.resource, rp.quantity);
-                        obj = null;
-                        break;
-                    }
-                default:
-                    break;
-            }
-        }
-
         public void DailyTick()
         {
             foreach (var tile in Map)
@@ -75,8 +52,6 @@ namespace HoMM
                     if (m.Owner != null)
                         m.Owner.GainResources(m.Resource, m.Yield);
                 }
-
-
 
             DaysPassed++;
             if (DaysPassed % 7 == 0)
