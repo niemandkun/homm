@@ -22,9 +22,16 @@ namespace HoMM.Units.HexagonalMovementUnit
             var movement = Compatibility.Check<IHexMovCommand>(this, _command).Movement;
             if (movement == null) return UnitResponse.Denied();
 
+            var newLocation = movement.Turn(actor.Location);
             var commandDuration = rules.MovementDuration * actor.VelocityModifier;
 
-            actor.World.Clocks.AddTrigger(new OneTimeTrigger(commandDuration, 
+            if (!newLocation.IsInside(actor.World.Round.Map.Size) ||
+                (!actor.World.Round.Map[newLocation].tileObject?.IsPassable ?? false))
+                return UnitResponse.Accepted(commandDuration);
+
+            // actor.World.HommEngine ?? TODO: start animation
+
+            actor.World.Clocks.AddTrigger(new OneTimeTrigger(commandDuration / 2, 
                 () => actor.Location = movement.Turn(actor.Location)));
 
             return UnitResponse.Accepted(commandDuration);
