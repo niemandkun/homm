@@ -115,7 +115,7 @@ namespace HoMM
                 .SingleOrDefault(res => res[0] == s[2]);
             var unitType = (UnitType)Enum.Parse(typeof(UnitType), monsterTypeName);
             int amount = int.Parse(s.Substring(3).Split('.')[0]);
-            return new NeutralArmy(UnitFactory.CreateFromUnitType(unitType), amount, location);
+            return new NeutralArmy(new Dictionary<UnitType, int> { [unitType] = amount }, location);
         }
 
         public IEnumerator<Tile> GetEnumerator()

@@ -1,17 +1,19 @@
-﻿namespace HoMM
+﻿using System.Collections.Generic;
+
+namespace HoMM
 {
-    public class NeutralArmy : TileObject
+    public class NeutralArmy : TileObject, ICombatable
     {
-        public readonly Unit Unit;
+        public int Attack { get; } = 0;
+        public int Defence { get; } = 0;
+        public Dictionary<UnitType, int> Army { get; private set; }
         public CapturableObject GuardedObject { get; private set; }
-        public int Quantity { get; private set; }
         
         public override bool IsPassable => true;
 
-        public NeutralArmy(Unit unit, int quantity, Location location) : base(location)
+        public NeutralArmy(Dictionary<UnitType, int> army, Location location) : base(location)
         {
-            Unit = unit;
-            Quantity = quantity;
+            Army = army;
         }
 
         public void GuardObject(CapturableObject obj)
@@ -21,13 +23,9 @@
 
         public override void InteractWithPlayer(Player p)
         {
-            var tempPlayer = new Player("Neutral army", null, 0, 0);
-            tempPlayer.AddUnits(Unit.UnitType, Quantity);
-            Combat.ResolveBattle(p, tempPlayer);
-            if (tempPlayer.HasNoArmy)
+            Combat.ResolveBattle(p, this);
+            if (this.HasNoArmy())
                 OnRemove();
-            else
-                Quantity = tempPlayer.Army[Unit.UnitType];
         }
     }
 }

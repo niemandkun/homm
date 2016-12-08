@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HoMM
 {
-    public class Player
+    public class Player : ICombatable
     {
         public string Name { get; private set; }
         public int Attack { get; private set; }
@@ -12,16 +12,7 @@ namespace HoMM
         Dictionary<Resource, int> resources;
         public Location Location { get; set; }
         public Dictionary<UnitType, int> Army { get; }
-        public bool HasNoArmy
-        {
-            get
-            {
-                foreach (var stack in Army)
-                    if (stack.Value > 0)
-                        return false;
-                return true;
-            }
-        }
+
 
 
         public Player(string name, Map map)

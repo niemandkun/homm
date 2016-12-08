@@ -7,12 +7,12 @@ namespace HoMM
 {
     public static class Combat
     {
-        public static void ResolveBattle(Player p1, Player p2)
+        public static void ResolveBattle(ICombatable p1, ICombatable p2)
         {
             double atkDmgMod = (p1.Attack - p2.Defence) * ((p1.Attack - p2.Defence > 0) ? 0.05 : 0.025);
             double defDmgMod = (p2.Attack - p1.Defence) * ((p2.Attack - p1.Defence > 0) ? 0.05 : 0.025);
 
-            while (!p1.HasNoArmy && !p2.HasNoArmy)
+            while (!p1.HasNoArmy() && !p2.HasNoArmy())
             {
                 var p2NewArmy = ResolveTurn(p1, p2, atkDmgMod);
                 var p1NewArmy = ResolveTurn(p2, p1, defDmgMod);
@@ -24,7 +24,7 @@ namespace HoMM
             }
         }
 
-        private static Dictionary<UnitType, int> ResolveTurn(Player attacker, Player defender, double atkDmgMod)
+        private static Dictionary<UnitType, int> ResolveTurn(ICombatable attacker, ICombatable defender, double atkDmgMod)
         {
             var tempArmyDef = new Dictionary<UnitType, int>(defender.Army);
             foreach (var attStack in attacker.Army.Where(u => u.Value > 0))
