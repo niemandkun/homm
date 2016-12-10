@@ -123,7 +123,7 @@ namespace HoMM.Engine {
             camera.transform.Rotate(45, 0, 0);
         }
 
-        public void Move(string id, Directions direction) {
+        public void Move(string id, Direction direction, double duration) {
             /*var obj = GameObject.Find(id);
             obj.AddComponent<Rigidbody>();
             obj.GetComponent<Rigidbody>().useGravity = false;

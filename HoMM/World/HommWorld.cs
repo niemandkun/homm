@@ -15,19 +15,26 @@ namespace HoMM.World
         public Round Round { get; private set; }
         public Random Random { get; private set; }
 
+        public Player[] Players { get; private set; }
+
         public override void CreateWorld()
         {
             Random = new Random(WorldState.Seed);
-            HommEngine = GetEngine<IHommEngine>();
-            CommonEngine = GetEngine<ICommonEngine>();
-            
+
             var map = MapHelper.CreateMap(Random);
-            var players = new Player[] {
+
+            Players = new Player[] {
                 new Player(TwoPlayersId.Left, map),
                 new Player(TwoPlayersId.Right, map),
             };
 
-            Round = new Round(map, players);
+            Round = new Round(map, Players);
+
+            CommonEngine = GetEngine<ICommonEngine>();
+            HommEngine hommEngine = GetEngine<HommEngine>();
+            HommEngine = hommEngine;
+
+            MapUnityConnecter.Connect(Round, hommEngine);
         }
     }
 }

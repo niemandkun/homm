@@ -1,15 +1,12 @@
 ﻿using CVARC.V2;
-using HoMM.Hero;
-using HoMM.Units.HexagonalMovementUnit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using HoMM.Robot;
+using HoMM.Units.ArmyInterface;
+using HoMM.Units.HexagonalMovement;
 using System.Windows.Forms;
 
 namespace HoMM.Rules
 {
-    class HommRules : IRules, IHexMovRules
+    class HommRules : IRules
     {
         public static readonly HommRules Current = new HommRules();
         public const string StandingBotName = "Standing";
@@ -26,6 +23,7 @@ namespace HoMM.Rules
                 pool.Add(Keys.D, () => new HommCommand { Movement = new Movement(Direction.RightDown) });
                 pool.Add(Keys.Q, () => new HommCommand { Movement = new Movement(Direction.LeftUp) });
                 pool.Add(Keys.E, () => new HommCommand { Movement = new Movement(Direction.RightUp) });
+                pool.Add(Keys.Space, () => new HommCommand { Order = new PurchaseOrder(10) });
             }
             else if (controllerId == TwoPlayersId.Right)
             {
@@ -35,11 +33,14 @@ namespace HoMM.Rules
                 pool.Add(Keys.L, () => new HommCommand { Movement = new Movement(Direction.RightDown) });
                 pool.Add(Keys.U, () => new HommCommand { Movement = new Movement(Direction.LeftUp) });
                 pool.Add(Keys.O, () => new HommCommand { Movement = new Movement(Direction.RightUp) });
+                pool.Add(Keys.Enter, () => new HommCommand { Order = new PurchaseOrder(10) });
             }
 
             pool.StopCommand = () => new HommCommand { Movement = new Wait() };
         }
 
         public double MovementDuration => 10;
+        public double WaitDuration => MovementDuration;
+        public double BuyDuration => MovementDuration;
     }
 }

@@ -72,5 +72,34 @@ namespace HoMM
             var otherFixY = other.Y + 0.5 * (other.X % 2);
             return Math.Abs(X-other.X) + Math.Abs(thisFixY-otherFixY);
         }
+
+        public Location NeighborAt(Direction Direction)
+        {
+            var isEven = Y % 2 == 0;
+
+            switch (Direction)
+            {
+                case Direction.Up:
+                    return new Location(Y - 1, X);
+
+                case Direction.Down:
+                    return new Location(Y + 1, X);
+
+                case Direction.LeftUp:
+                    return new Location(isEven ? Y - 1 : Y, X - 1);
+
+                case Direction.LeftDown:
+                    return new Location(isEven ? Y : Y + 1, X - 1);
+
+                case Direction.RightUp:
+                    return new Location(isEven ? Y - 1 : Y, X + 1);
+
+                case Direction.RightDown:
+                    return new Location(isEven ? Y : Y + 1, X + 1);
+            }
+
+            throw new ArgumentException($"Value of {nameof(Direction)} is invalid" +
+                " and not supported by this method!");
+        }
     }
 }

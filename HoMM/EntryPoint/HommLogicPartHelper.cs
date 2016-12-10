@@ -1,12 +1,13 @@
 ﻿using CVARC.V2;
-using HoMM.Hero;
+using HoMM.Robot;
+using HoMM.Rules;
 using HoMM.World;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HoMM.Rules
+namespace HoMM.EntryPoint
 {
     public class HommLogicPartHelper : LogicPartHelper
     {
