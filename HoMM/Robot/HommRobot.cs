@@ -1,4 +1,5 @@
 ﻿using CVARC.V2;
+using HoMM.Engine;
 using HoMM.Rules;
 using HoMM.Sensors;
 using HoMM.Units.ArmyInterface;
@@ -15,11 +16,12 @@ namespace HoMM.Robot
         public override IEnumerable<IUnit> Units { get; }
         
         public Player Player { get; }
+        public IHommEngine HommEngine { get; }
         public Map Map => World.Round.Map;
 
         public HeroRobot()
         {
-            Player = World.Players.Where(x => x.Name == ControllerId).Single();
+            Player = World.Players.Where(p => p.Name == ControllerId).Single();
 
             Units = new List<IUnit>
             {

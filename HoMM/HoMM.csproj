@@ -110,6 +110,7 @@
     <Compile Include="EntryPoint\HommLogicPartHelper.cs" />
     <Compile Include="Robot\HommRules.cs" />
     <Compile Include="Sensors\HommSensorData.cs" />
+    <Compile Include="Units\HexagonalMovement\UpdateLocationTrigger.cs" />
     <Compile Include="Units\ArmyInterface\IArmyInterfaceCommand.cs" />
     <Compile Include="Units\ArmyInterface\ArmyInterfaceUnit.cs" />
     <Compile Include="Common\Direction.cs" />

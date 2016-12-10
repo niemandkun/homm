@@ -8,18 +8,18 @@ using HoMM.Engine;
 
 namespace HoMM.EntryPoint
 {
-    class BundleEntryPoint : IBundleEntryPoint
+    public class BundleEntryPoint : IBundleEntryPoint
     {
         public IEnumerable<Competitions> GetLevels()
         {
-            return new Competitions[]
-            {
-                new Competitions("level1", new HommLogicPartHelper(2), () => new UKeyboard(), () =>
-                {
-                    var commonEngine = new CommonEngine();
-                    return new List<IEngine> { new CommonEngine(), new HommEngine(commonEngine) };
-                })
-            };
+            yield return new Competitions("level1", new HommLogicPartHelper(2), () => new UKeyboard(), CreateEngines);
+        }
+
+        private List<IEngine> CreateEngines()
+        {
+            var commonEngine = new CommonEngine();
+            var hommEngine = new HommEngine(commonEngine);
+            return new List<IEngine> { commonEngine, hommEngine };
         }
     }
 }

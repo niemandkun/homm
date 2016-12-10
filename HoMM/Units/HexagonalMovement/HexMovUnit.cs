@@ -1,5 +1,6 @@
 ﻿using CVARC.V2;
 using HoMM.Robot;
+using HoMM.World;
 
 namespace HoMM.Units.HexagonalMovement
 {
@@ -17,14 +18,16 @@ namespace HoMM.Units.HexagonalMovement
             var movement = Compatibility.Check<IHexMovCommand>(this, command).Movement;
             if (movement == null) return UnitResponse.Denied();
 
-            var movementResult = movement.TryMoveHero(actor.World.HommEngine, actor.Player, actor.Map);
+            var movementResult = movement.TryMoveHero(
+                actor.World.HommEngine, actor.Player, actor.World.Round.Map);
+
             var newLocation = movementResult.Item1;
             var movementDuration = movementResult.Item2;
+            
+            actor.World.Clocks.AddTrigger(new UpdateLocationTrigger(
+                actor.World.Clocks.CurrentTime + movementDuration, actor, newLocation));
 
-            actor.World.Clocks.AddTrigger(new OneTimeTrigger(movementDuration / 2, 
-                () => actor.Player.Location = newLocation));
-
-            return UnitResponse.Accepted(movementDuration);
+            return UnitResponse.Accepted(double.PositiveInfinity);
         }
     }
 }

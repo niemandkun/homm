@@ -1,11 +1,10 @@
 ﻿using CVARC.V2;
 using HoMM.Robot;
 using HoMM.Rules;
+using HoMM.Units.HexagonalMovement;
 using HoMM.World;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace HoMM.EntryPoint
 {
@@ -13,8 +12,18 @@ namespace HoMM.EntryPoint
     {
         int playersCount;
 
+        static string[] pids = new string[]
+        {
+            TwoPlayersId.Left,
+            TwoPlayersId.Right,
+        };
+
         public HommLogicPartHelper(int playersCount)
         {
+            if (playersCount <= 0 && playersCount > pids.Length)
+                throw new ArgumentOutOfRangeException(
+                    $"{playersCount} player(s) mode is not supported! Try 1 or 2.");
+
             this.playersCount = playersCount;
         }
 
@@ -23,7 +32,7 @@ namespace HoMM.EntryPoint
             var logicPart = new LogicPart();
             var rules = new HommRules();
 
-            logicPart.CreateWorld = () => new HommWorld();
+            logicPart.CreateWorld = () => new HommWorld(pids.Take(playersCount).ToArray());
             logicPart.CreateDefaultSettings = () => new Settings { OperationalTimeLimit = 5, TimeLimit = 90 };
 
             logicPart.WorldStateType = typeof(HommWorldState);
@@ -31,12 +40,12 @@ namespace HoMM.EntryPoint
             logicPart.PredefinedWorldStates.AddRange(Enumerable.Range(0, 5).Select(i => i.ToString()));
 
             var actorFactory = ActorFactory.FromRobot(new HeroRobot(), rules);
-            logicPart.Actors[TwoPlayersId.Left] = actorFactory;
+            
+            foreach (var pid in pids.Take(playersCount))
+                logicPart.Actors[pid] = actorFactory;
 
-            if (playersCount == 2)
-                logicPart.Actors[TwoPlayersId.Right] = actorFactory;
-
-            logicPart.Bots[HommRules.StandingBotName] = () => new Bot<HommCommand>(_ => new HommCommand());
+            logicPart.Bots[HommRules.StandingBotName] = () => 
+                new Bot<HommCommand>(_ => new HommCommand { Movement = new Wait() });
 
             return logicPart;
         }

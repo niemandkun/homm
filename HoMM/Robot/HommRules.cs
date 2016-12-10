@@ -42,5 +42,7 @@ namespace HoMM.Rules
         public double MovementDuration => 10;
         public double WaitDuration => MovementDuration;
         public double BuyDuration => MovementDuration;
+        public double CombatDuration => MovementDuration;
+        public double DailyTickInterval => 100;
     }
 }
