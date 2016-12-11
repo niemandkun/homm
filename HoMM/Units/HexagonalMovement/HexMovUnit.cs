@@ -24,8 +24,8 @@ namespace HoMM.Units.HexagonalMovement
             var newLocation = movementResult.Item1;
             var movementDuration = movementResult.Item2;
             
-            actor.World.Clocks.AddTrigger(new UpdateLocationTrigger(
-                actor.World.Clocks.CurrentTime + movementDuration, actor, newLocation));
+            actor.World.Clocks.AddTrigger(actor.LocationTrigger = new LocationTrigger(
+                actor.World.Clocks.CurrentTime, movementDuration / 2, actor, newLocation));
 
             return UnitResponse.Accepted(double.PositiveInfinity);
         }

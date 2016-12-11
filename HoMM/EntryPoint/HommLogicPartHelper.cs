@@ -39,7 +39,7 @@ namespace HoMM.EntryPoint
             logicPart.CreateWorldState = seed => new HommWorldState(int.Parse(seed));
             logicPart.PredefinedWorldStates.AddRange(Enumerable.Range(0, 5).Select(i => i.ToString()));
 
-            var actorFactory = ActorFactory.FromRobot(new HeroRobot(), rules);
+            var actorFactory = ActorFactory.FromRobot(new HommRobot(), rules);
             
             foreach (var pid in pids.Take(playersCount))
                 logicPart.Actors[pid] = actorFactory;

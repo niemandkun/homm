@@ -7,5 +7,8 @@ namespace HoMM.Robot
     {
         new HommWorld World { get; }
         Player Player { get; }
+        LocationTrigger LocationTrigger { get; set; }
+
+        void Die();
     }
 }
